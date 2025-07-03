@@ -1,6 +1,6 @@
 # Credit-Card-Transaction-Report #
 
-# Objective:# 
+# Objective: # 
 To analyze credit card transaction data, uncover spending patterns, detect anomalies, and provide actionable insights to improve financial decision-making.
 
 # Role: # 
