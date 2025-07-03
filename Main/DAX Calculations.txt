@@ -1,0 +1,50 @@
+Current Week Revenue:
+
+Current_week_revenue = CALCULATE(
+    SUM(credit_card[Revenue]),
+    FILTER(
+        ALL(credit_card),
+        'credit_card'[week_num2] = MAX('credit_card'[week_num2])))
+
+Previous Week Revenue:
+
+Previous_week_revenue = CALCULATE(
+    SUM(credit_card[Revenue]),
+    FILTER(
+        ALL(credit_card),
+        'credit_card'[week_num2] = MAX('credit_card'[week_num2])-1))
+
+Revenue:
+
+Revenue = 'credit_card'[Annual_Fees] + 'credit_card'[Total_Trans_Amt] + 'credit_card'[Interest_Earned]
+
+Week num2:
+
+week_num2 = WEEKNUM('credit_card'[Week_Start_Date])
+
+Week-on-Week Revenue:
+
+wow_Revenue = DIVIDE(([Current_week_revenue] - [Previous_week_revenue]), [Previous_week_revenue])
+
+Age Group:
+
+AgeGroup = SWITCH( 
+    TRUE(),
+    'customer'[Customer_Age] < 30, "10-30",
+    'customer'[Customer_Age] >= 30 && customer[Customer_Age] < 40, "30-40",
+    'customer'[Customer_Age] >= 40 && customer[Customer_Age] < 50, "40-50",
+    'customer'[Customer_Age] >= 50 && customer[Customer_Age] < 60, "50-60",
+    'customer'[Customer_Age] >= 60, "60+",
+    "unknown"
+)
+
+Income Group:
+
+IncomeGroup = SWITCH(
+    TRUE(),
+    'customer'[Income] < 35000, "Low Income",
+    'customer'[Income] >= 35000 && 'customer'[Income] < 70000, "Medium Income",
+    'customer'[Income] >= 70000, "High Income",
+    "unknown"
+    )
+
